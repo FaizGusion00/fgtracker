@@ -9,10 +9,14 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
+import { useAuth } from "@/contexts/AuthContext";
+import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 
 const Settings = () => {
   const { settings, updateSettings } = useExpenseStore();
   const { theme, setTheme } = useTheme();
+  const { user, loading } = useAuth();
 
   const handleCurrencyChange = (value: string) => {
     updateSettings({ currency: value });
@@ -29,6 +33,14 @@ const Settings = () => {
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -76,6 +88,25 @@ const Settings = () => {
                   <p className="text-xs text-muted-foreground mt-1">
                     Currency used throughout the application
                   </p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Account Information</CardTitle>
+                <CardDescription>Your account details</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-1">
+                  <Label>Email</Label>
+                  <div className="p-2 border rounded-md bg-muted/50">{user?.email}</div>
+                </div>
+                <div className="space-y-1">
+                  <Label>Name</Label>
+                  <div className="p-2 border rounded-md bg-muted/50">
+                    {user?.user_metadata.full_name || 'Not provided'}
+                  </div>
                 </div>
               </CardContent>
             </Card>
