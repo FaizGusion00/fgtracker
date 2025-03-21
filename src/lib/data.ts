@@ -1,4 +1,3 @@
-
 import { Expense, Category, Budget, MonthlyTotal, CategoryTotal } from "./types";
 import { 
   CreditCard, ShoppingCart, Home, Car, Utensils, 
@@ -11,13 +10,23 @@ export const generateId = (): string => {
   return Math.random().toString(36).substring(2, 9);
 };
 
-// Format amount as currency
+// Defined currencies
+export const currencies: { [key: string]: { symbol: string, name: string } } = {
+  MYR: { symbol: 'RM', name: 'Malaysian Ringgit' },
+  USD: { symbol: '$', name: 'US Dollar' },
+  EUR: { symbol: '€', name: 'Euro' },
+  GBP: { symbol: '£', name: 'British Pound' },
+  JPY: { symbol: '¥', name: 'Japanese Yen' },
+  SGD: { symbol: 'S$', name: 'Singapore Dollar' },
+  AUD: { symbol: 'A$', name: 'Australian Dollar' }
+};
+
+// Format currency based on selected currency
 export const formatCurrency = (amount: number): string => {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 2
-  }).format(amount);
+  const { settings } = useExpenseStore.getState();
+  const currency = currencies[settings.currency] || currencies.MYR;
+  
+  return `${currency.symbol}${amount.toFixed(2)}`;
 };
 
 // Format date

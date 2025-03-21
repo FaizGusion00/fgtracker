@@ -1,13 +1,14 @@
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { Expense, Category, Budget } from './types';
+import { Expense, Category, Budget, Settings } from './types';
 import { generateId, defaultCategories, sampleExpenses, sampleBudgets } from './data';
 
 interface ExpenseState {
   expenses: Expense[];
   categories: Category[];
   budgets: Budget[];
+  settings: Settings;
   addExpense: (expense: Omit<Expense, 'id'>) => void;
   updateExpense: (id: string, expense: Partial<Expense>) => void;
   deleteExpense: (id: string) => void;
@@ -17,6 +18,7 @@ interface ExpenseState {
   addBudget: (budget: Omit<Budget, 'id'>) => void;
   updateBudget: (id: string, budget: Partial<Budget>) => void;
   deleteBudget: (id: string) => void;
+  updateSettings: (settings: Partial<Settings>) => void;
   resetToSampleData: () => void;
 }
 
@@ -26,6 +28,11 @@ export const useExpenseStore = create<ExpenseState>()(
       expenses: sampleExpenses,
       categories: defaultCategories,
       budgets: sampleBudgets,
+      settings: {
+        currency: 'MYR',
+        theme: 'light',
+        language: 'en'
+      },
 
       addExpense: (expense) => set((state) => ({
         expenses: [...state.expenses, { id: generateId(), ...expense }]
@@ -67,6 +74,10 @@ export const useExpenseStore = create<ExpenseState>()(
 
       deleteBudget: (id) => set((state) => ({
         budgets: state.budgets.filter((budget) => budget.id !== id)
+      })),
+
+      updateSettings: (newSettings) => set((state) => ({
+        settings: { ...state.settings, ...newSettings }
       })),
 
       resetToSampleData: () => set({

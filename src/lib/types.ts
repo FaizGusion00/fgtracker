@@ -37,3 +37,15 @@ export interface CategoryTotal {
   percentage: number;
   color: string;
 }
+
+export interface Settings {
+  currency: string;
+  theme: "light" | "dark";
+  language: string;
+}
+
+export type Currency = {
+  code: string;
+  symbol: string;
+  name: string;
+};
