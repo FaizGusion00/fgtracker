@@ -151,6 +151,7 @@ const Auth = () => {
                         <FormLabel>Full Name</FormLabel>
                         <FormControl>
                           <Input 
+                            type="text"
                             placeholder="John Doe" 
                             {...field}
                             disabled={isLoading}
