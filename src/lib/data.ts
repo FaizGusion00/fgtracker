@@ -4,6 +4,7 @@ import {
   Plane, GraduationCap, Coffee, Gift, Droplet, 
   Banknote, Zap, Wifi, Smartphone, HeartPulse 
 } from "lucide-react";
+import { useExpenseStore } from "./store";
 
 // Generate a unique ID 
 export const generateId = (): string => {

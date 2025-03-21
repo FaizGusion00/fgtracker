@@ -24,7 +24,7 @@ export function CategoryCard({ category }: CategoryCardProps) {
   const getProgressColor = () => {
     if (percentage >= 100) return "bg-destructive";
     if (percentage >= 85) return "bg-orange-500";
-    return "";
+    return "bg-primary";
   };
 
   return (
@@ -60,8 +60,7 @@ export function CategoryCard({ category }: CategoryCardProps) {
           </div>
           <Progress
             value={Math.min(percentage, 100)}
-            className="h-2"
-            indicatorClassName={getProgressColor()}
+            className={cn("h-2", getProgressColor())}
           />
         </div>
       </CardContent>

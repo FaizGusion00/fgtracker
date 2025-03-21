@@ -17,7 +17,7 @@ export function BudgetCard({ budget }: BudgetCardProps) {
   const getProgressColor = () => {
     if (percentage >= 100) return "bg-destructive";
     if (percentage >= 85) return "bg-orange-500";
-    return "";
+    return "bg-primary";
   };
 
   return (
@@ -36,8 +36,7 @@ export function BudgetCard({ budget }: BudgetCardProps) {
           </div>
           <Progress
             value={Math.min(percentage, 100)}
-            className="h-2"
-            indicatorClassName={getProgressColor()}
+            className={cn("h-2", getProgressColor())}
           />
           <div className="flex justify-between items-center text-sm">
             <span className={cn(

@@ -148,7 +148,6 @@ export function ExpenseChart() {
                       bottom: 5,
                     }}
                     barCategoryGap={isMobile ? 5 : 20}
-                    animationDuration={500}
                   >
                     <XAxis dataKey="month" />
                     <YAxis 
