@@ -2,7 +2,7 @@
 
 ## Project info
 
-**URL**: **https://lovable.dev/projects/33dc0deb-1cdb-4d78-82a5-174648f0bd5c**
+**URL**: [**https://lovable.dev/projects/33dc0deb-1cdb-4d78-82a5-174648f0bd5c**](https://fgtracker.lovable.app/)
 
 ```sh
 # Step 1: Clone the repository using the project's Git URL.
